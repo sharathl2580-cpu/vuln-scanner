@@ -1,0 +1,12 @@
+__pycache__/
+*.pyc
+*.egg-info/
+build/
+dist/
+.env
+venv/
+.venv/
+.pytest_cache/
+results.sarif
+sbom.json
+audit.html

@@ -1,0 +1,30 @@
+name: Security Scan
+
+on:
+  push:
+    branches: [main, master]
+  pull_request:
+    branches: [main, master]
+
+jobs:
+  security-scan:
+    runs-on: ubuntu-latest
+    permissions:
+      security-events: write
+      contents: read
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+      - name: Install vuln-scanner
+        run: pip install -e ".[dev]"
+      - name: Run unit tests
+        run: pytest -v
+      - name: Run security scan (SARIF)
+        run: vuln-scanner . --format sarif --output results.sarif --fail-on high
+      - name: Upload SARIF to GitHub Security
+        if: always()
+        uses: github/codeql-action/upload-sarif@v3
+        with:
+          sarif_file: results.sarif

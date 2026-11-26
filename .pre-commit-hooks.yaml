@@ -1,0 +1,6 @@
+- id: vuln-scanner
+  name: Vulnerability & Cybersecurity Scanner
+  description: Scan staged repository for leaked secrets, SAST issues, IaC misconfigs, and hygiene problems.
+  entry: vuln-scanner . --no-network --fail-on high
+  language: python
+  pass_filenames: false

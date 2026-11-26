@@ -1,0 +1,19 @@
+# Example vuln-scanner.toml configuration
+checks = ["all"]
+format = "text"
+fail_on = "high"
+no_network = false
+no_cache = false
+git_history = false
+git_max_commits = 50
+exclude = ["docs/*", "*.min.js"]
+ignore_rules = []
+
+# Optional organization-specific custom rules
+# [[custom_rules]]
+# id = "CUST001"
+# severity = "HIGH"
+# pattern = "internal\\.corp\\.example"
+# message = "Internal corporate domain referenced in source"
+# remediation = "Move internal endpoints to environment configuration."
+# extensions = [".py", ".js", ".ts"]
