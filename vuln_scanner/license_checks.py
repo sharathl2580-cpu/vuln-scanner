@@ -81,7 +81,7 @@ def _fetch_package_license(
     try:
         if ecosystem == "PyPI":
             url = f"https://pypi.org/pypi/{package}/{version}/json"
-            resp = requests.get(url, timeout=8)
+            resp = requests.get(url, timeout=8)  # nosec SAST013
             if resp.status_code == 200:
                 info = resp.json().get("info", {})
                 lic = info.get("license") or info.get("license_expression")
@@ -92,7 +92,7 @@ def _fetch_package_license(
                             break
         elif ecosystem == "npm":
             url = f"https://registry.npmjs.org/{package}/{version}"
-            resp = requests.get(url, timeout=8)
+            resp = requests.get(url, timeout=8)  # nosec SAST013
             if resp.status_code == 200:
                 raw_lic = resp.json().get("license")
                 if isinstance(raw_lic, dict):

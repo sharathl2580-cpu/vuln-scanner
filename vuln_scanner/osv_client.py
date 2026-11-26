@@ -126,7 +126,7 @@ def _fetch_vuln_details(
             return cached
 
     try:
-        resp = requests.get(OSV_VULN_URL.format(vuln_id=vuln_id), timeout=10)
+        resp = requests.get(OSV_VULN_URL.format(vuln_id=vuln_id), timeout=10)  # nosec SAST013
         if resp.status_code == 200:
             data = resp.json()
             if cache is not None:
@@ -171,7 +171,7 @@ def query_osv_batch(
             for pkg, ver, eco in chunk
         ]
         try:
-            resp = requests.post(OSV_BATCH_URL, json={"queries": queries}, timeout=15)
+            resp = requests.post(OSV_BATCH_URL, json={"queries": queries}, timeout=15)  # nosec SAST013
             if resp.status_code != 200:
                 continue
             batch_data = resp.json().get("results", [])

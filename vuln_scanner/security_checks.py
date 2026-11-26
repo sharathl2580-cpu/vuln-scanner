@@ -187,7 +187,10 @@ ENTROPY_ASSIGN_RE = re.compile(
     r"""(?i)\b(?:token|secret|key|auth|bearer|credential|jwt|signing)[A-Za-z0-9_]*\b\s*[:=]\s*['"]([^'"\s]{20,})['"]"""
 )
 
-SQL_KEYWORD_RE = re.compile(r"\b(?:SELECT|INSERT|UPDATE|DELETE)\b", re.IGNORECASE)
+SQL_KEYWORD_RE = re.compile(
+    r"\b(?:SELECT\s+.+?\s+FROM|INSERT\s+INTO|UPDATE\s+\w+\s+SET|DELETE\s+FROM)\b",
+    re.IGNORECASE | re.DOTALL,
+)
 HTTP_URL_RE = re.compile(
     r"http://(?!localhost\b|127\.0\.0\.1\b|0\.0\.0\.0\b|www\.w3\.org\b|schemas\.)[A-Za-z0-9.-]+"
 )

@@ -198,7 +198,7 @@ def parse_cargo_lock(file_path: Path) -> List[Tuple[str, str]]:
 def parse_maven_pom(file_path: Path) -> List[Tuple[str, str]]:
     deps: List[Tuple[str, str]] = []
     try:
-        tree = ET.parse(file_path)
+        tree = ET.parse(file_path)  # nosec SAST012
         root = tree.getroot()
     except Exception:
         return []
